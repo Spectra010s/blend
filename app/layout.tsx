@@ -32,6 +32,7 @@ twitter: {
 }
 }
 
+
 export default function RootLayout({
   children,
 }: Readonly<{
