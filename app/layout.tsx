@@ -29,7 +29,8 @@ twitter: {
   card: "summary_large_image",
   title: "Blend • Multitasking made easy",
   description: "Blend is an app that provides  you with tools used for multitasking."
-},
+}
+
 
 export default function RootLayout({
   children,
