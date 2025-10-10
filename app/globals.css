@@ -112,6 +112,16 @@
   --sidebar-ring: oklch(0.556 0 0);
 }
 
+.scrollbar-hidden::-webkit-scrollbar {
+  display: none; 
+}
+.scrollbar-hidden {
+  -ms-overflow-style: none; 
+  scrollbar-width: none;      
+}
+
+
+
 @layer base {
   * {
     @apply border-border outline-ring/50;
