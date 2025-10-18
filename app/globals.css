@@ -1,5 +1,5 @@
-@import "tailwindcss";
-@import "tw-animate-css";
+@import 'tailwindcss';
+@import 'tw-animate-css';
 
 @custom-variant dark (&:is(.dark *));
 
@@ -113,14 +113,12 @@
 }
 
 .scrollbar-hidden::-webkit-scrollbar {
-  display: none; 
+  display: none;
 }
 .scrollbar-hidden {
-  -ms-overflow-style: none; 
-  scrollbar-width: none;      
+  -ms-overflow-style: none;
+  scrollbar-width: none;
 }
-
-
 
 @layer base {
   * {
