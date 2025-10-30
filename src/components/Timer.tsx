@@ -7,6 +7,7 @@ import { Play, Pause, RefreshCw } from 'lucide-react'
 import { NumberPicker } from '@/components/NumberPicker'
 import { getTimer, saveTimer } from '@/utils/localStorage'
 import { TimerKey } from '@/types'
+import { Howl } from 'howler'
 
 export default function Timer() {
   const [sec, setSec] = useState(0)
@@ -17,7 +18,7 @@ export default function Timer() {
   const [showPauseResume, setShowPauseResume] = useState<boolean>(false)
   const [initialTime, setInitialTime] = useState(0)
   const interval = useRef<ReturnType<typeof setInterval> | null>(null)
-  const alarm = useRef<HTMLAudioElement | null>(null)
+  const alarm = useRef<Howl | null>(null)
 
   const seconds = Array.from({ length: 60 }, (_, i) => i)
   const minutes = Array.from({ length: 60 }, (_, i) => i)
@@ -32,7 +33,9 @@ export default function Timer() {
   }, [hour, min, sec])
 
   useEffect(() => {
-    alarm.current = new Audio('/alarm.mp3')
+    alarm.current = new Howl({
+      src: ['/alarm.mp3']
+    })
   }, [])
 
   useEffect(() => {
@@ -92,8 +95,7 @@ export default function Timer() {
     setTimeLeft(initialTime)
     setIsRunning(false)
     setShowPauseResume(false)
-    alarm.current?.pause()
-    if (alarm.current) alarm.current.currentTime = 0
+    alarm.current?.stop()
   }
 
   const convertSecondsToTime = (seconds: number) => {
