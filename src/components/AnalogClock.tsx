@@ -79,7 +79,7 @@ export default function AnalogClock() {
         ></div>
 
         <div className="absolute top-1/2 left-1/2 w-3 h-3 bg-gray-800 dark:bg-gray-100 border border-white dark:border-gray-800 rounded-full transform -translate-x-1/2 -translate-y-1/2 z-40 transition-colors duration-500"></div>
-        <div className="absolute inset-0 flex items-center justify-center font-semibold text-gray-700 dark:text-gray-300 text-base font-mono mt-3 transition-colors duration-500">
+        <div className="absolute inset-0 flex items-start mt-10 justify-center font-semibold text-gray-700 dark:text-gray-300 text-base font-mono mt-3 transition-colors duration-500">
           {time.toLocaleTimeString()}
         </div>
       </div>

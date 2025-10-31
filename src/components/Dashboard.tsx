@@ -21,11 +21,11 @@ export default function Dashboard() {
   if (!isClient) return null
 
   return (
-    <main className="h-screen w-full flex flex-col relative">
-      <div className="h-16 flex items-center px-4 bg-background text-foreground flex-shrink-0">
+    <main className="h-screen w-full flex flex-col">
+      <div className="absolute h-16 flex items-center px-4 bg-background text-foreground flex-shrink-0">
         <h1 className="text-2xl font-medium font-bold">Blend - Dashboard</h1>
       </div>
-      <div className="flex flex-col gap-10 m-3 overflow-x-hidden">
+      <div className="flex flex-col mt-20 gap-10 m-3 overflow-x-hidden">
         <div className="flex flex-row items-center justify-between">
           <div className="text-xl font-mono text-gray-800 dark:text-gray-200 mt-6 transition-colors duration-500 p-2">
             <p>Today&apos;s Date is</p>

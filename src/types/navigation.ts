@@ -5,7 +5,7 @@ export interface NavItem {
   id: string
   label: string
   icon: ComponentType<SVGProps<SVGSVGElement>>
-  component: ComponentType<{ active?: boolean}>
+  component: ComponentType<{ active?: boolean }>
 }
 
 export interface FooterProps {
