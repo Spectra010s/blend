@@ -42,6 +42,15 @@ export default function ThemeProvider({ children }: { children: React.ReactNode 
       localStorage.setItem('theme', initialTheme)
     }
   }, [])
+  useEffect(() => {
+    let meta = document.querySelector('meta[name="theme-color"]') as HTMLMetaElement | null
+    if (!meta) {
+      meta = document.createElement('meta') as HTMLMetaElement
+      meta.name = 'theme-color'
+      document.head.appendChild(meta)
+    }
+    meta.content = theme === 'dark' ? '#171717' : '#ffffff'
+  }, [theme])
 
   const contextValue = { theme, setTheme }
 

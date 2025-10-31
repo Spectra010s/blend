@@ -4,6 +4,7 @@ import { Geist, Geist_Mono } from 'next/font/google'
 import './globals.css'
 import { Analytics } from '@vercel/analytics/next'
 import ThemeProvider from '@/context/theme-provider'
+import ThemeMeta from '@/components/ThemeMeta'
 
 const geistSans = Geist({
   variable: '--font-geist-sans',
@@ -42,7 +43,10 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <meta name="theme-color" content="#ffffff" />
       </head>
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
-        <ThemeProvider>{children}</ThemeProvider>
+        <ThemeProvider>
+          <ThemeMeta />
+          {children}
+        </ThemeProvider>
         <Analytics />
       </body>
     </html>
