@@ -11,7 +11,7 @@ export default function AlarmCard({ onClick, alarm, onDelete }: AlarmCardProps) 
   const [remainingTime, setRemainingTime] = useState('')
   const pressTimerRef = useRef<number | null>(null)
 
-  const handlePressStart = (e: MouseEvent | React.TouchEvent) => {
+  const handlePressStart = (e: React.MouseEvent | React.TouchEvent) => {
     e.stopPropagation()
     setIsPressing(true)
 
@@ -38,7 +38,7 @@ export default function AlarmCard({ onClick, alarm, onDelete }: AlarmCardProps) 
     })
   }
 
-  const handleCardClick = (e: MouseEvent) => {
+  const handleCardClick = (e: React.MouseEvent) => {
     e.stopPropagation()
     if (showDelete) {
       setShowDelete(false)
