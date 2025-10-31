@@ -7,7 +7,7 @@ import { getNotes, saveNotes } from '@/utils/localStorage'
 import { NoteEditor } from '@/components/NoteEditor'
 import { NoteCard } from '@/components/NoteCard'
 
-export default function NotesPage({ active }: { active: boolean }) {
+export default function NotesPage({ active }: { active?: boolean }) {
   const [mounted, setMounted] = useState(false)
   const [notes, setNotes] = useState<Note[]>([])
   const [editingNote, setEditingNote] = useState<Note | null>(null)

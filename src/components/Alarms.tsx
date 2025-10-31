@@ -8,7 +8,7 @@ import { Alarm } from '@/types'
 import AlarmEditor from '@/components/AlarmEditor'
 import { getAlarm, saveAlarm } from '@/utils/localStorage'
 
-export default function Alarms({ active }: { active: boolean }) {
+export default function Alarms({ active }: { active?: boolean }) {
   const [alarms, setAlarms] = useState<Alarm[]>([])
   const [editorOpen, setEditorOpen] = useState(false)
   const [editingAlarm, setEditingAlarm] = useState<Alarm | null>(null)
