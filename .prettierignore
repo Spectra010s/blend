@@ -1,0 +1,7 @@
+# prettier ignore files
+build/
+coverage/
+node_modules/
+.next/
+.git/
+.vercel/
