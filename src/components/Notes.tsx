@@ -91,6 +91,13 @@ export default function NotesPage({ active }: { active?: boolean }) {
           <Plus size={24} />
         </button>
       )}
+      <button
+          onClick={handleNewNote}
+          aria-label="Add new note"
+          className="absolute bottom-24 right-6 p-4 rounded-full shadow-lg bg-gray-800 text-white hover:bg-gray-700 transition-all duration-300"
+        >
+          <Plus size={24} />
+        </button>
     </main>
   )
 }
