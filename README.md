@@ -13,9 +13,10 @@
 
 Blend is a sleek, client-side productivity application designed to streamline your daily tasks. It combines essential tools like notes, alarms, a timer, and a to-do list into a single, intuitive interface. Built with Next.js and TypeScript, it offers a seamless and responsive experience on both desktop and mobile devices.
 
---- 
+---
 
 ## Mobile Screenshot
+
 <div style="display: flex; align-items: center; justify-content: center;">
   <img style="width: 300px;" src="public/images/timer.jpg" alt="Blendapp">
 </div>
@@ -98,7 +99,6 @@ Contributions are what make the open-source community such an amazing place to l
 5.  **Open a Pull Request**
 
 Read more in [CONTRIBUTING](./CONTRIBUTING.md)
-
 
 ## License
 
