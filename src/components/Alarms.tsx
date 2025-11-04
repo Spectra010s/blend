@@ -56,7 +56,7 @@ export default function Alarms({ active }: { active?: boolean }) {
   }
 
   return (
-    <main className="h-screen w-full flex flex-col border-x border-x-bg-black dark:border-x-bg-white">
+    <main className="h-screen w-full flex flex-col border-x border-x-bg-black dark:border-x-bg-white md:relative">
       <div className="absolute h-16 flex items-center px-4 bg-background text-foreground flex-shrink-0">
         <h1 className="text-2xl font-bold">Alarms</h1>
       </div>
@@ -95,11 +95,19 @@ export default function Alarms({ active }: { active?: boolean }) {
         />
       )}
 
-      {active && (
+      {active ? (
         <button
           onClick={() => setEditorOpen(true)}
           aria-label="Add new Alarm"
           className="fixed bottom-24 right-6 p-4 rounded-full shadow-lg bg-gray-800 text-white hover:bg-gray-700 transition-all duration-300"
+        >
+          <Plus size={24} />
+        </button>
+      ) : (
+        <button
+          onClick={() => setEditorOpen(true)}
+          aria-label="Add new Alarm"
+          className="absolute bottom-24 right-6 p-4 rounded-full shadow-lg bg-gray-800 text-white hover:bg-gray-700 transition-all duration-300"
         >
           <Plus size={24} />
         </button>
