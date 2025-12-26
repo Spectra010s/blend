@@ -1,41 +1,41 @@
-'use client'
+'use client';
 
-import { useState, useRef, MouseEvent } from 'react'
-import { Trash2 } from 'lucide-react'
-import { NoteCardProps } from '@/types'
-import { ConfirmToast } from '@/components/ConfirmToast'
+import { useState, useRef, MouseEvent } from 'react';
+import { Trash2 } from 'lucide-react';
+import { NoteCardProps } from '@/types';
+import { ConfirmToast } from '@/components/ConfirmToast';
 
 export const NoteCard = ({ note, onEdit, onDelete }: NoteCardProps) => {
-  const [showDelete, setShowDelete] = useState(false)
-  const [isPressing, setIsPressing] = useState(false)
-  const pressTimerRef = useRef<number | null>(null)
+  const [showDelete, setShowDelete] = useState(false);
+  const [isPressing, setIsPressing] = useState(false);
+  const pressTimerRef = useRef<number | null>(null);
 
   const handlePressStart = (e: MouseEvent | React.TouchEvent) => {
-    e.stopPropagation()
-    setIsPressing(true)
+    e.stopPropagation();
+    setIsPressing(true);
 
     pressTimerRef.current = window.setTimeout(() => {
-      setShowDelete(true)
-      setIsPressing(false)
-    }, 1000)
-  }
+      setShowDelete(true);
+      setIsPressing(false);
+    }, 1000);
+  };
 
   const handlePressEnd = () => {
-    setIsPressing(false)
+    setIsPressing(false);
     if (pressTimerRef.current) {
-      clearTimeout(pressTimerRef.current)
-      pressTimerRef.current = null
+      clearTimeout(pressTimerRef.current);
+      pressTimerRef.current = null;
     }
-  }
+  };
 
   const handleCardClick = (e: MouseEvent) => {
-    e.stopPropagation()
+    e.stopPropagation();
     if (showDelete) {
-      setShowDelete(false)
+      setShowDelete(false);
     } else if (!pressTimerRef.current) {
-      onEdit()
+      onEdit();
     }
-  }
+  };
 
   const formatTimestamp = (timestamp: number) => {
     return new Date(timestamp).toLocaleDateString('en-US', {
@@ -43,17 +43,17 @@ export const NoteCard = ({ note, onEdit, onDelete }: NoteCardProps) => {
       day: 'numeric',
       hour: '2-digit',
       minute: '2-digit',
-    })
-  }
+    });
+  };
 
   const handleDelete = (e: React.MouseEvent) => {
-    e.stopPropagation()
+    e.stopPropagation();
     ConfirmToast({
       message: 'Are you sure you want to delete this note?',
       confirmText: 'Yes, Delete',
       onConfirm: () => onDelete(note.id),
-    })
-  }
+    });
+  };
 
   return (
     <div
@@ -95,5 +95,5 @@ export const NoteCard = ({ note, onEdit, onDelete }: NoteCardProps) => {
         </div>
       )}
     </div>
-  )
-}
+  );
+};

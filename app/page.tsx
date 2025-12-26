@@ -1,7 +1,7 @@
-import Desktop from '@/components/Desktop'
-import Mobile from '@/components/Mobile'
-import ThemeToggler from '@/components/ThemeToggler'
-import { Toaster } from '@/components/ui/sonner'
+import Desktop from '@/components/Desktop';
+import Mobile from '@/components/Mobile';
+import ThemeToggler from '@/components/ThemeToggler';
+import { Toaster } from '@/components/ui/sonner';
 
 export default function Home() {
   return (
@@ -15,5 +15,5 @@ export default function Home() {
         <Desktop />
       </div>
     </>
-  )
+  );
 }

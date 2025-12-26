@@ -1,59 +1,59 @@
-'use client'
+'use client';
 
-import { useState, useEffect } from 'react'
-import { Howl } from 'howler'
-import { Plus, AlarmClock } from 'lucide-react'
-import AlarmCard from '@/components/AlarmCard'
-import { Alarm } from '@/types'
-import AlarmEditor from '@/components/AlarmEditor'
-import { getAlarm, saveAlarm } from '@/utils/localStorage'
+import { useState, useEffect } from 'react';
+import { Howl } from 'howler';
+import { Plus, AlarmClock } from 'lucide-react';
+import AlarmCard from '@/components/AlarmCard';
+import { Alarm } from '@/types';
+import AlarmEditor from '@/components/AlarmEditor';
+import { getAlarm, saveAlarm } from '@/utils/localStorage';
 
 export default function Alarms({ active }: { active?: boolean }) {
-  const [alarms, setAlarms] = useState<Alarm[]>([])
-  const [editorOpen, setEditorOpen] = useState(false)
-  const [editingAlarm, setEditingAlarm] = useState<Alarm | null>(null)
+  const [alarms, setAlarms] = useState<Alarm[]>([]);
+  const [editorOpen, setEditorOpen] = useState(false);
+  const [editingAlarm, setEditingAlarm] = useState<Alarm | null>(null);
 
-  useEffect(() => setAlarms(getAlarm()), [])
-  useEffect(() => saveAlarm(alarms), [alarms])
+  useEffect(() => setAlarms(getAlarm()), []);
+  useEffect(() => saveAlarm(alarms), [alarms]);
 
   useEffect(() => {
-    const alarmSound = new Howl({ src: ['/alarm.mp3'] })
+    const alarmSound = new Howl({ src: ['/alarm.mp3'] });
     const interval = setInterval(() => {
-      const now = new Date()
-      const currentTime = `${now.getHours().toString().padStart(2, '0')}:${now.getMinutes().toString().padStart(2, '0')}`
+      const now = new Date();
+      const currentTime = `${now.getHours().toString().padStart(2, '0')}:${now.getMinutes().toString().padStart(2, '0')}`;
       setAlarms(prev =>
         prev.map(alarm => {
           if (alarm.time === currentTime && !alarm.isRinging) {
-            alarmSound.play()
-            return { ...alarm, isRinging: true }
+            alarmSound.play();
+            return { ...alarm, isRinging: true };
           }
-          return alarm
-        })
-      )
-    }, 1000)
-    return () => clearInterval(interval)
-  }, [])
+          return alarm;
+        }),
+      );
+    }, 1000);
+    return () => clearInterval(interval);
+  }, []);
 
   const handleSave = (time: string) => {
     if (editingAlarm) {
       setAlarms(prev =>
-        prev.map(a => (a.id === editingAlarm.id ? { ...a, time, isRinging: false } : a))
-      )
-      setEditingAlarm(null)
+        prev.map(a => (a.id === editingAlarm.id ? { ...a, time, isRinging: false } : a)),
+      );
+      setEditingAlarm(null);
     } else {
-      setAlarms(prev => [...prev, { id: Date.now().toString(), time, isRinging: false }])
+      setAlarms(prev => [...prev, { id: Date.now().toString(), time, isRinging: false }]);
     }
-    setEditorOpen(false)
-  }
+    setEditorOpen(false);
+  };
 
   const handleDelete = (id: string) => {
-    setAlarms(prev => prev.filter(a => a.id !== id))
-  }
+    setAlarms(prev => prev.filter(a => a.id !== id));
+  };
 
   const handleEdit = (alarm: Alarm) => {
-    setEditingAlarm(alarm)
-    setEditorOpen(true)
-  }
+    setEditingAlarm(alarm);
+    setEditorOpen(true);
+  };
 
   return (
     <main className="h-screen w-full flex flex-col border-x border-x-bg-black dark:border-x-bg-white md:relative">
@@ -88,8 +88,8 @@ export default function Alarms({ active }: { active?: boolean }) {
         <AlarmEditor
           onSave={handleSave}
           onClose={() => {
-            setEditorOpen(false)
-            setEditingAlarm(null)
+            setEditorOpen(false);
+            setEditingAlarm(null);
           }}
           alarmTime={editingAlarm?.time}
         />
@@ -113,5 +113,5 @@ export default function Alarms({ active }: { active?: boolean }) {
         </button>
       )}
     </main>
-  )
+  );
 }

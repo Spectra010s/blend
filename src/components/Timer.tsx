@@ -1,113 +1,113 @@
-'use client'
+'use client';
 
-import React, { useRef, useState, useEffect } from 'react'
-import { Button } from '@/components/ui/button'
-import CircularProgress from '@/components/CircularProgress'
-import { Play, Pause, RefreshCw } from 'lucide-react'
-import { NumberPicker } from '@/components/NumberPicker'
-import { getTimer, saveTimer } from '@/utils/localStorage'
-import { TimerKey } from '@/types'
-import { Howl } from 'howler'
+import React, { useRef, useState, useEffect } from 'react';
+import { Button } from '@/components/ui/button';
+import CircularProgress from '@/components/CircularProgress';
+import { Play, Pause, RefreshCw } from 'lucide-react';
+import { NumberPicker } from '@/components/NumberPicker';
+import { getTimer, saveTimer } from '@/utils/localStorage';
+import { TimerKey } from '@/types';
+import { Howl } from 'howler';
 
 export default function Timer() {
-  const [sec, setSec] = useState(0)
-  const [min, setMin] = useState(0)
-  const [hour, setHour] = useState(0)
-  const [timeLeft, setTimeLeft] = useState(0)
-  const [isRunning, setIsRunning] = useState(false)
-  const [showPauseResume, setShowPauseResume] = useState<boolean>(false)
-  const [initialTime, setInitialTime] = useState(0)
-  const interval = useRef<ReturnType<typeof setInterval> | null>(null)
-  const alarm = useRef<Howl | null>(null)
+  const [sec, setSec] = useState(0);
+  const [min, setMin] = useState(0);
+  const [hour, setHour] = useState(0);
+  const [timeLeft, setTimeLeft] = useState(0);
+  const [isRunning, setIsRunning] = useState(false);
+  const [showPauseResume, setShowPauseResume] = useState<boolean>(false);
+  const [initialTime, setInitialTime] = useState(0);
+  const interval = useRef<ReturnType<typeof setInterval> | null>(null);
+  const alarm = useRef<Howl | null>(null);
 
-  const seconds = Array.from({ length: 60 }, (_, i) => i)
-  const minutes = Array.from({ length: 60 }, (_, i) => i)
-  const hours = Array.from({ length: 24 }, (_, i) => i)
+  const seconds = Array.from({ length: 60 }, (_, i) => i);
+  const minutes = Array.from({ length: 60 }, (_, i) => i);
+  const hours = Array.from({ length: 24 }, (_, i) => i);
 
   useEffect(() => {
     if (!isRunning) {
-      const totalSeconds = hour * 3600 + min * 60 + sec
-      setTimeLeft(totalSeconds)
-      setInitialTime(totalSeconds)
+      const totalSeconds = hour * 3600 + min * 60 + sec;
+      setTimeLeft(totalSeconds);
+      setInitialTime(totalSeconds);
     }
-  }, [hour, min, sec])
+  }, [hour, min, sec]);
 
   useEffect(() => {
     alarm.current = new Howl({
       src: ['/alarm.mp3'],
-    })
-  }, [])
+    });
+  }, []);
 
   useEffect(() => {
-    const data: TimerKey | null = getTimer()
+    const data: TimerKey | null = getTimer();
     if (data !== null && data.initialTime !== null) {
-      setTimeLeft(data.timeLeft || 0)
-      setInitialTime(data.initialTime || 0)
-      setIsRunning(false)
-      setShowPauseResume(data.initialTime > 0)
+      setTimeLeft(data.timeLeft || 0);
+      setInitialTime(data.initialTime || 0);
+      setIsRunning(false);
+      setShowPauseResume(data.initialTime > 0);
     }
-  }, [])
+  }, []);
 
   useEffect(() => {
-    saveTimer({ timeLeft, initialTime })
-  }, [timeLeft, initialTime])
+    saveTimer({ timeLeft, initialTime });
+  }, [timeLeft, initialTime]);
 
   useEffect(() => {
     if (isRunning && timeLeft > 0) {
       interval.current = setInterval(() => {
         setTimeLeft(prev => {
-          const next = prev - 1
+          const next = prev - 1;
           if (next <= 0) {
-            clearInterval(interval.current!)
-            alarm.current?.play()
-            setShowPauseResume(false)
-            setIsRunning(false)
-            return 0
+            clearInterval(interval.current!);
+            alarm.current?.play();
+            setShowPauseResume(false);
+            setIsRunning(false);
+            return 0;
           }
-          return next
-        })
-      }, 1000)
+          return next;
+        });
+      }, 1000);
     }
 
-    return () => clearInterval(interval.current!)
-  }, [isRunning, timeLeft])
+    return () => clearInterval(interval.current!);
+  }, [isRunning, timeLeft]);
 
   const startTimer = () => {
-    if (timeLeft <= 0) return
-    setInitialTime(timeLeft)
-    setIsRunning(true)
-    setShowPauseResume(true)
-  }
+    if (timeLeft <= 0) return;
+    setInitialTime(timeLeft);
+    setIsRunning(true);
+    setShowPauseResume(true);
+  };
 
   const pauseTimer = () => {
-    setIsRunning(false)
-    clearInterval(interval.current!)
-  }
+    setIsRunning(false);
+    clearInterval(interval.current!);
+  };
 
   const resumeTimer = () => {
     if (timeLeft > 0) {
-      setIsRunning(true)
+      setIsRunning(true);
     }
-  }
+  };
 
   const resetTimer = () => {
-    clearInterval(interval.current!)
-    setTimeLeft(initialTime)
-    setIsRunning(false)
-    setShowPauseResume(false)
-    alarm.current?.stop()
-  }
+    clearInterval(interval.current!);
+    setTimeLeft(initialTime);
+    setIsRunning(false);
+    setShowPauseResume(false);
+    alarm.current?.stop();
+  };
 
   const convertSecondsToTime = (seconds: number) => {
     const h = Math.floor(seconds / 3600)
       .toString()
-      .padStart(2, '0')
+      .padStart(2, '0');
     const m = Math.floor((seconds % 3600) / 60)
       .toString()
-      .padStart(2, '0')
-    const s = (seconds % 60).toString().padStart(2, '0')
-    return `${h}:${m}:${s}`
-  }
+      .padStart(2, '0');
+    const s = (seconds % 60).toString().padStart(2, '0');
+    return `${h}:${m}:${s}`;
+  };
 
   return (
     <div className="flex flex-col w-full h-screen overflow-hidden relative">
@@ -178,5 +178,5 @@ export default function Timer() {
         </div>
       </div>
     </div>
-  )
+  );
 }

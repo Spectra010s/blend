@@ -1,37 +1,37 @@
-'use client'
+'use client';
 
-import { useState, useEffect, useCallback } from 'react'
-import { X } from 'lucide-react'
-import { Note, NoteEditorProps } from '@/types'
+import { useState, useEffect, useCallback } from 'react';
+import { X } from 'lucide-react';
+import { Note, NoteEditorProps } from '@/types';
 
 export const NoteEditor = ({ note, onSave, onClose }: NoteEditorProps) => {
-  const [localNote, setLocalNote] = useState<Note>(note)
+  const [localNote, setLocalNote] = useState<Note>(note);
 
   const autoSave = useCallback(
     (currentNote: Note) => {
-      if (!currentNote.title && !currentNote.content) return
+      if (!currentNote.title && !currentNote.content) return;
 
-      const updatedNote = { ...currentNote, updatedAt: Date.now() }
-      onSave(updatedNote)
+      const updatedNote = { ...currentNote, updatedAt: Date.now() };
+      onSave(updatedNote);
     },
-    [onSave]
-  )
+    [onSave],
+  );
 
   useEffect(() => {
     const timeout = setTimeout(() => {
-      autoSave(localNote)
-    }, 200)
+      autoSave(localNote);
+    }, 200);
 
-    return () => clearTimeout(timeout)
-  }, [localNote, autoSave])
+    return () => clearTimeout(timeout);
+  }, [localNote, autoSave]);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    const { name, value } = e.target
+    const { name, value } = e.target;
     setLocalNote(prev => ({
       ...prev,
       [name]: value,
-    }))
-  }
+    }));
+  };
 
   return (
     <div className="fixed inset-0 z-50 bg-background dark:bg-neutral-900 flex flex-col pr-4 pl-4 sm:p-10">
@@ -62,5 +62,5 @@ export const NoteEditor = ({ note, onSave, onClose }: NoteEditorProps) => {
         className="flex-grow w-full text-lg text-foreground/80 border-none outline-none resize-none p-0 bg-transparent placeholder:text-neutral-500 dark:placeholder:text-neutral-400"
       />
     </div>
-  )
-}
+  );
+};

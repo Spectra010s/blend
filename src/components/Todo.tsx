@@ -1,44 +1,44 @@
-'use client'
+'use client';
 
-import { useState, useEffect } from 'react'
-import { Todo } from '@/types'
-import { getTodos, saveTodos } from '@/utils/localStorage'
-import { X, ListTodo } from 'lucide-react'
+import { useState, useEffect } from 'react';
+import { Todo } from '@/types';
+import { getTodos, saveTodos } from '@/utils/localStorage';
+import { X, ListTodo } from 'lucide-react';
 
 export default function TodoPage() {
-  const [todos, setTodos] = useState<Todo[]>([])
-  const [newTask, setNewTask] = useState('')
+  const [todos, setTodos] = useState<Todo[]>([]);
+  const [newTask, setNewTask] = useState('');
 
   useEffect(() => {
-    setTodos(getTodos())
-  }, [])
+    setTodos(getTodos());
+  }, []);
 
   const addTodo = () => {
-    if (!newTask.trim()) return
+    if (!newTask.trim()) return;
 
     const newTodo: Todo = {
       id: Date.now(),
       task: newTask,
       done: false,
-    }
+    };
 
-    const updatedTodos = [...todos, newTodo]
-    setTodos(updatedTodos)
-    saveTodos(updatedTodos)
-    setNewTask('')
-  }
+    const updatedTodos = [...todos, newTodo];
+    setTodos(updatedTodos);
+    saveTodos(updatedTodos);
+    setNewTask('');
+  };
 
   const toggleDone = (id: number) => {
-    const updatedTodos = todos.map(todo => (todo.id === id ? { ...todo, done: !todo.done } : todo))
-    setTodos(updatedTodos)
-    saveTodos(updatedTodos)
-  }
+    const updatedTodos = todos.map(todo => (todo.id === id ? { ...todo, done: !todo.done } : todo));
+    setTodos(updatedTodos);
+    saveTodos(updatedTodos);
+  };
 
   const deleteTodo = (id: number) => {
-    const updatedTodos = todos.filter(todo => todo.id !== id)
-    setTodos(updatedTodos)
-    saveTodos(updatedTodos)
-  }
+    const updatedTodos = todos.filter(todo => todo.id !== id);
+    setTodos(updatedTodos);
+    saveTodos(updatedTodos);
+  };
 
   return (
     <main className="h-screen w-full flex flex-col relative border-x border-x-bg-black dark:border-x-bg-white">
@@ -92,5 +92,5 @@ export default function TodoPage() {
         ))}
       </ul>
     </main>
-  )
+  );
 }

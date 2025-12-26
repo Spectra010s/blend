@@ -1,8 +1,8 @@
-'use client'
+'use client';
 
-import { toast } from 'sonner'
-import { Button } from '@/components/ui/button'
-import { ConfirmToastOptions } from '@/types'
+import { toast } from 'sonner';
+import { Button } from '@/components/ui/button';
+import { ConfirmToastOptions } from '@/types';
 
 export function ConfirmToast({
   message,
@@ -10,7 +10,7 @@ export function ConfirmToast({
   cancelText = 'cancel',
   onConfirm,
 }: ConfirmToastOptions) {
-  const blend = 'toastid'
+  const blend = 'toastid';
   toast(
     () => (
       <div className="flex flex-col gap-2">
@@ -20,9 +20,9 @@ export function ConfirmToast({
             variant="destructive"
             size="sm"
             onClick={() => {
-              onConfirm()
-              toast.dismiss(blend)
-              toast.success('Deleted Successfully')
+              onConfirm();
+              toast.dismiss(blend);
+              toast.success('Deleted Successfully');
             }}
           >
             {confirmText}
@@ -37,6 +37,6 @@ export function ConfirmToast({
     {
       duration: Infinity,
       id: blend,
-    }
-  )
+    },
+  );
 }

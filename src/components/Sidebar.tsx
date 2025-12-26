@@ -1,12 +1,12 @@
-'use client'
+'use client';
 
-import { useState } from 'react'
-import { SidebarItem } from '@/components/SidebarItem'
-import { navItems } from '@/data/navigation'
-import { SidebarProps } from '@/types'
+import { useState } from 'react';
+import { SidebarItem } from '@/components/SidebarItem';
+import { navItems } from '@/data/navigation';
+import { SidebarProps } from '@/types';
 
 export default function Sidebar({ active, setActive }: SidebarProps) {
-  const [isHovered, setIsHovered] = useState(false)
+  const [isHovered, setIsHovered] = useState(false);
 
   return (
     <div
@@ -28,5 +28,5 @@ export default function Sidebar({ active, setActive }: SidebarProps) {
         ))}
       </nav>
     </div>
-  )
+  );
 }

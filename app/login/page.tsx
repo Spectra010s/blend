@@ -1,7 +1,7 @@
-import { Badge } from '@/components/ui/badge'
-import { ClockIcon } from 'lucide-react'
-import Link from 'next/link'
-import type { Metadata } from 'next'
+import { Badge } from '@/components/ui/badge';
+import { ClockIcon } from 'lucide-react';
+import Link from 'next/link';
+import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
   title: 'Login | Blend',
@@ -19,7 +19,7 @@ export const metadata: Metadata = {
     title: 'Blend • Multitasking made easy',
     description: 'Blend is an app that provides  you with tools used for multitasking.',
   },
-}
+};
 
 export default function Login() {
   return (
@@ -37,5 +37,5 @@ export default function Login() {
         </Link>
       </div>
     </main>
-  )
+  );
 }

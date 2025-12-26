@@ -1,15 +1,15 @@
-'use client'
+'use client';
 
-import { navItems } from '@/data/navigation'
-import { FooterProps } from '@/types'
+import { navItems } from '@/data/navigation';
+import { FooterProps } from '@/types';
 
 export const Footer = ({ active, onNavClick }: FooterProps) => {
   return (
     <div className="fixed bottom-0 left-0 w-full rounded-t-xl border-t-2 border-neutral-200 dark:border-neutral-500 bg-background backdrop-blur-md z-50">
       <div className="flex justify-around items-center">
         {navItems.map(item => {
-          const Icon = item.icon
-          const isActive = active === item.id
+          const Icon = item.icon;
+          const isActive = active === item.id;
           return (
             <button
               key={item.id}
@@ -35,9 +35,9 @@ export const Footer = ({ active, onNavClick }: FooterProps) => {
                 {item.label}
               </span>
             </button>
-          )
+          );
         })}
       </div>
     </div>
-  )
-}
+  );
+};

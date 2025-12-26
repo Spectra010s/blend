@@ -1,5 +1,5 @@
-import { NumberPickerProps } from '@/types'
-import { useRef, useEffect } from 'react'
+import { NumberPickerProps } from '@/types';
+import { useRef, useEffect } from 'react';
 
 export const NumberPicker = ({
   numbers,
@@ -8,24 +8,24 @@ export const NumberPicker = ({
   label,
   disabled = false,
 }: NumberPickerProps) => {
-  const scrollRef = useRef<HTMLDivElement>(null)
+  const scrollRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     if (scrollRef.current) {
-      const itemHeight = 30
-      const index = numbers.indexOf(value)
+      const itemHeight = 30;
+      const index = numbers.indexOf(value);
 
       if (index !== -1) {
         scrollRef.current.scrollTop =
-          index * itemHeight - scrollRef.current.clientHeight / 2 + itemHeight / 2
+          index * itemHeight - scrollRef.current.clientHeight / 2 + itemHeight / 2;
       }
     }
-  }, [scrollRef, numbers, value])
+  }, [scrollRef, numbers, value]);
 
   const handleSelect = (n: number) => {
-    if (disabled) return
-    setValue(n)
-  }
+    if (disabled) return;
+    setValue(n);
+  };
 
   return (
     <div className="flex flex-col items-center">
@@ -51,5 +51,5 @@ export const NumberPicker = ({
         <div style={{ height: '30px' }} />
       </div>
     </div>
-  )
-}
+  );
+};
