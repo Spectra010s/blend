@@ -1,31 +1,31 @@
-'use client'
+'use client';
 
-import { useState, useEffect, useRef, useCallback } from 'react'
-import { AlarmEditorProps } from '@/types'
+import { useState, useEffect, useRef, useCallback } from 'react';
+import { AlarmEditorProps } from '@/types';
 
 export default function AlarmEditor({ onSave, onClose, alarmTime }: AlarmEditorProps) {
-  const [hours, setHours] = useState(alarmTime ? alarmTime.split(':')[0] : '00')
-  const [minutes, setMinutes] = useState(alarmTime ? alarmTime.split(':')[1] : '00')
-  const overlayRef = useRef<HTMLDivElement>(null)
+  const [hours, setHours] = useState(alarmTime ? alarmTime.split(':')[0] : '00');
+  const [minutes, setMinutes] = useState(alarmTime ? alarmTime.split(':')[1] : '00');
+  const overlayRef = useRef<HTMLDivElement>(null);
 
   const handleSave = () => {
-    onSave(`${hours}:${minutes}`)
-    onClose()
-  }
+    onSave(`${hours}:${minutes}`);
+    onClose();
+  };
 
   const handleClickOutside = useCallback(
     (e: MouseEvent) => {
       if (overlayRef.current && !overlayRef.current.contains(e.target as Node)) {
-        onClose()
+        onClose();
       }
     },
-    [onClose]
-  )
+    [onClose],
+  );
 
   useEffect(() => {
-    document.addEventListener('mousedown', handleClickOutside)
-    return () => document.removeEventListener('mousedown', handleClickOutside)
-  }, [handleClickOutside])
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, [handleClickOutside]);
 
   return (
     <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-20">
@@ -78,5 +78,5 @@ export default function AlarmEditor({ onSave, onClose, alarmTime }: AlarmEditorP
         </div>
       </div>
     </div>
-  )
+  );
 }

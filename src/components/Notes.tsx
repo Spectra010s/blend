@@ -1,41 +1,41 @@
-'use client'
+'use client';
 
-import { useState, useEffect } from 'react'
-import { Plus, NotebookText } from 'lucide-react'
-import { Note } from '@/types'
-import { getNotes, saveNotes } from '@/utils/localStorage'
-import { NoteEditor } from '@/components/NoteEditor'
-import { NoteCard } from '@/components/NoteCard'
+import { useState, useEffect } from 'react';
+import { Plus, NotebookText } from 'lucide-react';
+import { Note } from '@/types';
+import { getNotes, saveNotes } from '@/utils/localStorage';
+import { NoteEditor } from '@/components/NoteEditor';
+import { NoteCard } from '@/components/NoteCard';
 
 export default function NotesPage({ active }: { active?: boolean }) {
-  const [mounted, setMounted] = useState(false)
-  const [notes, setNotes] = useState<Note[]>([])
-  const [editingNote, setEditingNote] = useState<Note | null>(null)
+  const [mounted, setMounted] = useState(false);
+  const [notes, setNotes] = useState<Note[]>([]);
+  const [editingNote, setEditingNote] = useState<Note | null>(null);
 
   useEffect(() => {
-    setMounted(true)
-    const savedNotes = getNotes()
-    setNotes(savedNotes)
-  }, [])
+    setMounted(true);
+    const savedNotes = getNotes();
+    setNotes(savedNotes);
+  }, []);
 
-  if (!mounted) return null
+  if (!mounted) return null;
 
   const handleSaveNote = (note: Note) => {
-    let updatedNotes: Note[]
+    let updatedNotes: Note[];
     if (notes.some(n => n.id === note.id)) {
-      updatedNotes = notes.map(n => (n.id === note.id ? note : n))
+      updatedNotes = notes.map(n => (n.id === note.id ? note : n));
     } else {
-      updatedNotes = [{ ...note, createdAt: Date.now() }, ...notes]
+      updatedNotes = [{ ...note, createdAt: Date.now() }, ...notes];
     }
-    setNotes(updatedNotes)
-    saveNotes(updatedNotes)
-  }
+    setNotes(updatedNotes);
+    saveNotes(updatedNotes);
+  };
 
   const handleDeleteNote = (id: string) => {
-    const updatedNotes = notes.filter(n => n.id !== id)
-    setNotes(updatedNotes)
-    saveNotes(updatedNotes)
-  }
+    const updatedNotes = notes.filter(n => n.id !== id);
+    setNotes(updatedNotes);
+    saveNotes(updatedNotes);
+  };
 
   const handleNewNote = () => {
     const newNote: Note = {
@@ -44,14 +44,14 @@ export default function NotesPage({ active }: { active?: boolean }) {
       content: '',
       createdAt: Date.now(),
       updatedAt: Date.now(),
-    }
-    setEditingNote(newNote)
-  }
+    };
+    setEditingNote(newNote);
+  };
 
   if (editingNote) {
     return (
       <NoteEditor note={editingNote} onSave={handleSaveNote} onClose={() => setEditingNote(null)} />
-    )
+    );
   }
 
   return (
@@ -100,5 +100,5 @@ export default function NotesPage({ active }: { active?: boolean }) {
         </button>
       )}
     </main>
-  )
+  );
 }

@@ -1,4 +1,4 @@
-import { SidebarItemProps } from '@/types'
+import { SidebarItemProps } from '@/types';
 
 export const SidebarItem = ({
   icon: Icon,
@@ -29,5 +29,5 @@ export const SidebarItem = ({
         {label}
       </span>
     </div>
-  )
-}
+  );
+};

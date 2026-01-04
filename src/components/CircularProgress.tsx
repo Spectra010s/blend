@@ -1,13 +1,13 @@
-import { CircularProgressProps } from '@/types'
+import { CircularProgressProps } from '@/types';
 
 export default function CircularProgress({ progress, text }: CircularProgressProps) {
-  const radius = 100
-  const strokeWidth = 5
-  const circumference = 2 * Math.PI * radius
-  const offset = circumference - (progress / 100) * circumference
+  const radius = 100;
+  const strokeWidth = 5;
+  const circumference = 2 * Math.PI * radius;
+  const offset = circumference - (progress / 100) * circumference;
 
-  const trackStrokeColor = 'text-gray-200 dark:text-gray-700'
-  const progressStrokeColor = 'text-black dark:text-white'
+  const trackStrokeColor = 'text-gray-200 dark:text-gray-700';
+  const progressStrokeColor = 'text-black dark:text-white';
 
   return (
     <div className="relative w-64 h-64">
@@ -39,5 +39,5 @@ export default function CircularProgress({ progress, text }: CircularProgressPro
         {text}
       </div>
     </div>
-  )
+  );
 }

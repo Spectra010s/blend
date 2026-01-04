@@ -1,34 +1,34 @@
-'use client'
+'use client';
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect } from 'react';
 
 const markers = Array.from({ length: 12 }, (_, i) => ({
   rotation: i * 30,
   isMajor: i % 3 === 0,
-}))
+}));
 
 export default function AnalogClock() {
-  const [time, setTime] = useState(new Date())
-  const [isClient, setIsClient] = useState(false)
+  const [time, setTime] = useState(new Date());
+  const [isClient, setIsClient] = useState(false);
 
   useEffect(() => {
-    setIsClient(true)
+    setIsClient(true);
     const intervalId = setInterval(() => {
-      setTime(new Date())
-    }, 1000)
+      setTime(new Date());
+    }, 1000);
 
-    return () => clearInterval(intervalId)
-  }, [])
+    return () => clearInterval(intervalId);
+  }, []);
 
-  if (!isClient) return null
+  if (!isClient) return null;
 
-  const hours = time.getHours()
-  const minutes = time.getMinutes()
-  const seconds = time.getSeconds()
+  const hours = time.getHours();
+  const minutes = time.getMinutes();
+  const seconds = time.getSeconds();
 
-  const secondDegrees = (seconds / 60) * 360
-  const minuteDegrees = (minutes / 60) * 360
-  const hourDegrees = ((hours % 12) / 12) * 360 + (minutes / 60) * 30
+  const secondDegrees = (seconds / 60) * 360;
+  const minuteDegrees = (minutes / 60) * 360;
+  const hourDegrees = ((hours % 12) / 12) * 360 + (minutes / 60) * 30;
 
   return (
     <div className="flex flex-col items-center justify-center p-4 bg-none transition-colors duration-500">
@@ -84,5 +84,5 @@ export default function AnalogClock() {
         </div>
       </div>
     </div>
-  )
+  );
 }

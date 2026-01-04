@@ -1,13 +1,13 @@
-'use client'
+'use client';
 
-import { useState } from 'react'
-import Sidebar from '@/components/Sidebar'
-import { navItems } from '@/data/navigation'
+import { useState } from 'react';
+import Sidebar from '@/components/Sidebar';
+import { navItems } from '@/data/navigation';
 
 export default function Desktop() {
-  const [activeComponentId, setActiveComponentId] = useState(navItems[0]?.id || 'dashboard')
+  const [activeComponentId, setActiveComponentId] = useState(navItems[0]?.id || 'dashboard');
 
-  const CurrentPage = navItems.find(item => item.id === activeComponentId)?.component
+  const CurrentPage = navItems.find(item => item.id === activeComponentId)?.component;
 
   return (
     <main className="min-h-screen hidden md:block overflow-hidden">
@@ -16,5 +16,5 @@ export default function Desktop() {
         <div className="flex flex-1 flex-col">{CurrentPage ? <CurrentPage /> : null}</div>
       </div>
     </main>
-  )
+  );
 }

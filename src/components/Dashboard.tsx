@@ -1,24 +1,24 @@
-'use client'
+'use client';
 
-import { useState, useEffect } from 'react'
-import SelectedClock from '@/components/SelectedClock'
-import { Badge } from '@/components/ui/badge'
-import { ClockIcon } from 'lucide-react'
+import { useState, useEffect } from 'react';
+import SelectedClock from '@/components/SelectedClock';
+import { Badge } from '@/components/ui/badge';
+import { ClockIcon } from 'lucide-react';
 
 export default function Dashboard() {
-  const [time, setTime] = useState(new Date())
-  const [isClient, setIsClient] = useState(false)
+  const [time, setTime] = useState(new Date());
+  const [isClient, setIsClient] = useState(false);
 
   useEffect(() => {
-    setIsClient(true)
+    setIsClient(true);
     const intervalId = setInterval(() => {
-      setTime(new Date())
-    }, 1000)
+      setTime(new Date());
+    }, 1000);
 
-    return () => clearInterval(intervalId)
-  }, [])
+    return () => clearInterval(intervalId);
+  }, []);
 
-  if (!isClient) return null
+  if (!isClient) return null;
 
   return (
     <main className="h-screen w-full flex flex-col">
@@ -51,5 +51,5 @@ export default function Dashboard() {
         </div>
       </div>
     </main>
-  )
+  );
 }

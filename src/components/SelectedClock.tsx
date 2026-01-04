@@ -1,15 +1,15 @@
-'use client'
+'use client';
 
-import { useState } from 'react'
-import AnalogClock from '@/components/AnalogClock'
-import DigitalClock from '@/components/DigitalClock'
+import { useState } from 'react';
+import AnalogClock from '@/components/AnalogClock';
+import DigitalClock from '@/components/DigitalClock';
 
 export default function SelectedClock() {
-  const [selectedClock, setSelectedClock] = useState('Analog')
+  const [selectedClock, setSelectedClock] = useState('Analog');
 
   const handleChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    setSelectedClock(e.target.value)
-  }
+    setSelectedClock(e.target.value);
+  };
 
   return (
     <div className="flex flex-col p-4">
@@ -26,5 +26,5 @@ export default function SelectedClock() {
         <option value="Digital">Digital Clock</option>
       </select>
     </div>
-  )
+  );
 }

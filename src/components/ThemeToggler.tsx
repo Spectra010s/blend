@@ -1,16 +1,16 @@
-'use client'
+'use client';
 
-import { Sun, Moon } from 'lucide-react'
-import { Button } from '@/components/ui/button'
-import { useTheme } from '@/context/theme-provider'
+import { Sun, Moon } from 'lucide-react';
+import { Button } from '@/components/ui/button';
+import { useTheme } from '@/context/theme-provider';
 
 export default function ThemeToggler() {
-  const { theme, setTheme } = useTheme()
+  const { theme, setTheme } = useTheme();
 
   const toggleTheme = () => {
-    const newTheme = theme === 'light' ? 'dark' : 'light'
-    setTheme(newTheme)
-  }
+    const newTheme = theme === 'light' ? 'dark' : 'light';
+    setTheme(newTheme);
+  };
 
   return (
     <Button
@@ -22,5 +22,5 @@ export default function ThemeToggler() {
     >
       {theme === 'dark' ? <Sun size={16} /> : <Moon size={16} />}
     </Button>
-  )
+  );
 }
